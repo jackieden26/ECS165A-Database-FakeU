@@ -197,6 +197,27 @@ while i < lenlist:
 
         else: #now we know that nextrow has at least one valid student information
 
+            #we need to find cid,term,ngrade
+            #and make sure units is within the course units range
+
+            #i is the line SEAT,SID...
+            #so we need to find the line of CID,TERM to get info
+            backcourserownumber = 0
+            for backfindcourse in range(i-1,0,-1):
+                if listreader[backfindcourse][0] != 'CID':
+                    continue
+                else:
+                    backcourserownumber = backfindcourse
+                    break
+
+            backcourserow = listreader[backcourserownumber+1]
+            cid = backcourserow[0]
+            term = backcourserow[1]
+            unitsrange = backcourserow[5]
+
+
+
+
             #we need to find snextemptyline (studentnextemptyline)
             #after student block
             snextemptyline = i
@@ -227,22 +248,7 @@ while i < lenlist:
                     studentstuple = (sid,status,prefname,surname,email)
                     studentstl.append(studentstuple)
 
-                #we need to find cid,term,ngrade
-                #and make sure units is within the course units range
 
-                #i is the line SEAT,SID...
-                #so we need to find the line of CID,TERM to get info
-                backcourserownumber = 0
-                for backfindcourse in range(i-1,0,-1):
-                    if listreader[backfindcourse][0] != 'CID':
-                        continue
-                    else:
-                        backcourserownumber = backfindcourse
-
-                backcourserow = listreader[backcourserownumber]
-                cid = backcourserow[0]
-                term = backcourserow[1]
-                unitsrange = backcourserow[5]
 
 
 
