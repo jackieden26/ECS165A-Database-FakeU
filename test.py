@@ -249,7 +249,7 @@ while i < lenlist:
                 if grade in gradedic:
                     ngrade = gradedic[grade]
                 else:
-                    ngrade = None
+                    ngrade = -1
 
                 taketuple = (sid,cid,term,major,seat,sclass,level,units,\
                         grade,ngrade,summer)
