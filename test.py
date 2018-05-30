@@ -223,6 +223,7 @@ while i < lenlist:
                 if sid in sidl:
                     pass
                 else:
+                    sidl.append(sid)
                     studentstuple = (sid,status,prefname,surname,email)
                     studentstl.append(studentstuple)
 
