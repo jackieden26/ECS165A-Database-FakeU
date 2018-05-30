@@ -1,6 +1,6 @@
 import csv
 
-path = "/Users/jackie/Desktop/Grades/duplicate_test.csv"
+path = "/Users/jackie/Desktop/Grades/1990_Q2.csv"
                                     #duplicate_test
                                     #1989_Q4.csv
 
@@ -116,8 +116,13 @@ while i < lenlist:
                 break
 
         # no instructor at all, totally empty
+        # because CID-IF will jump through the class who has no student,
+        # then in this if, there has to be student below,even
+        # there is no instructor at all (no type, no days...)
+        # which actually should not happen, because no student can have no instructor
         if j == i+1 :
             i += 2
+            print("we shouldn't go into here because no student have no instructor")
             continue
 
         #at least one instructor line
@@ -225,11 +230,20 @@ while i < lenlist:
                 #and make sure units is within the course units range
 
                 #i is the line SEAT,SID...
-                #so i-5 is the line contains info about cid,term...
-                lastfiverow = listreader[i-5]
-                cid = lastfiverow[0]
-                term = lastfiverow[1]
-                unitsrange = lastfiverow[5]
+                #so we need to find the line of CID,TERM to get info
+                backcourserownumber = 0
+                for backfindcourse in range(i-1,0,-1):
+                    if listreader[backfindcourse][0] != 'CID':
+                        continue
+                    else:
+                        backcourserownumber = backfindcourse
+
+                backcourserow = listreader[backcourserownumber]
+                cid = backcourserow[0]
+                term = backcourserow[1]
+                unitsrange = backcourserow[5]
+
+
 
                 if grade in gradedic:
                     ngrade = gradedic[grade]
