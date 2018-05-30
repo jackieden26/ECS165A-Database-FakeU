@@ -1,6 +1,6 @@
 import csv
 
-path = "/Users/jackie/Desktop/Grades/1990_Q2.csv"
+path = "/Users/jackie/Desktop/Grades/1990_Q3.csv"
                                     #duplicate_test
                                     #1989_Q4.csv
 
@@ -220,10 +220,10 @@ while i < lenlist:
                 status = mcurrentrow[9]
                 email = mcurrentrow[10]
 
-                studentstuple = (sid,status,prefname,surname,email)
                 if sid in sidl:
                     pass
                 else:
+                    studentstuple = (sid,status,prefname,surname,email)
                     studentstl.append(studentstuple)
 
                 #we need to find cid,term,ngrade
