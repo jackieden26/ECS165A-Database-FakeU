@@ -281,14 +281,14 @@ for allcsvfile in l:
                     # else:
                     #     prefname = qprefname
 
-                    if "'" in qsurname:
-                        surname = qsurname.replace("'","''")
-                    else:
-                        surname = qsurname
+                    if "'" in mcurrentrow[2]:
+                        mcurrentrow[2] = mcurrentrow[2].replace("'","''")
+                    # else:
+                    #     surname = qsurname
                     if "'" in qprefname:
-                        prefname = qprefname.replace("'","''")
-                    else:
-                        prefname = qprefname
+                        mcurrentrow[3] = mcurrentrow[3].replace("'","''")
+                    # else:
+                    #     prefname = qprefname
 
 
 
@@ -296,7 +296,7 @@ for allcsvfile in l:
                         pass
                     else:
                         sidl.append(sid)
-                        studentstuple = (sid,status,prefname,surname,email)
+                        studentstuple = (sid,status,mcurrentrow[3],mcurrentrow[2],email)
                         studentstl.append(studentstuple)
 
                     #construting take tuples
@@ -325,7 +325,7 @@ for allcsvfile in l:
                             print("this line is: ",i)
 
                     else:
-                        if units > float(unitsrange):
+                        if units > float(unitsrange) and units < 0:
                             print("student units not the same as this class")
                             print("stdeunt units is: ", units)
                             print("this file is: ",allcsvfile )
