@@ -229,6 +229,7 @@ for allcsvfile in l:
 
                 #i is the line SEAT,SID...
                 #so we need to find the line of CID,TERM to get info
+                #and we need to find the range of units
                 backcourserownumber = 0
                 for backfindcourse in range(i-1,0,-1):
                     if listreader[backfindcourse][0] != 'CID':
@@ -258,15 +259,24 @@ for allcsvfile in l:
                     mcurrentrow = listreader[m]
                     seat = mcurrentrow[0]
                     sid = mcurrentrow[1]
-                    surname = mcurrentrow[2]
-                    prefname = mcurrentrow[3]
+                    qsurname = mcurrentrow[2]   #some students might have '
+                    qprefname = mcurrentrow[3]  #in their name
                     level = mcurrentrow[4]
-                    units = mcurrentrow[5]
+                    sunits = mcurrentrow[5]
                     sclass = mcurrentrow[6]  #avoid using keyword class
                     major = mcurrentrow[7]
                     grade = mcurrentrow[8]
                     status = mcurrentrow[9]
                     email = mcurrentrow[10]
+
+
+                    qindex = qsurname.find('\'')
+                    qindex2 = qsurname.find('\'')
+                    if qindex != -1:
+                        surname = qsurname[:qindex] + '\'' + qsurname[qindex:]
+                    if qindex2 != -1:
+                        prefname = qprefname[:qindex2] + '\'' + qprefname[qindex2:]
+                    
 
                     if sid in sidl:
                         pass
@@ -275,14 +285,38 @@ for allcsvfile in l:
                         studentstuple = (sid,status,prefname,surname,email)
                         studentstl.append(studentstuple)
 
-
-
-
-
+                    #construting take tuples
+                    #find number grade using dictionary
                     if grade in gradedic:
                         ngrade = gradedic[grade]
                     else:
                         ngrade = -1
+
+                    if sunits == '':
+                        taketuple = (sid,cid,term,major,seat,sclass,level,units,\
+                                grade,ngrade,summer)
+                        taketl.append(taketuple)
+                    else:
+                        units = float(sunits)
+                    #check whether units
+                    if '-' in unitsrange:#this is a range of units
+                        down = float(unitsrange.split('-')[0])
+                        up = float(unitsrange.split('-')[1])
+                        if (units > up or units < down) and units != 0:
+                            print("up is " , up)
+                            print("down is: ", down)
+                            print("student units not in range")
+                            print("stdeunt units is: ", units)
+                            print("this file is: ",allcsvfile )
+                            print("this line is: ",i)
+
+                    else:
+                        if units != 0 and units != float(unitsrange):
+                            print("student units not the same as this class")
+                            print("stdeunt units is: ", units)
+                            print("this file is: ",allcsvfile )
+                            print("this line is: ",i)
+
 
                     taketuple = (sid,cid,term,major,seat,sclass,level,units,\
                             grade,ngrade,summer)
@@ -310,9 +344,11 @@ meetingts = str(meetingtl).strip('[]')
 studentsts = str(studentstl).strip('[]')
 takets = str(taketl).strip('[]')
 
+print(studentsts)
+
 
 #debug
-print(sorted(printedfile))
+#print(sorted(printedfile))
 
 
 
