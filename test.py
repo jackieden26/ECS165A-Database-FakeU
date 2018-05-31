@@ -274,9 +274,13 @@ for allcsvfile in l:
                     qindex2 = qsurname.find('\'')
                     if qindex != -1:
                         surname = qsurname[:qindex] + '\'' + qsurname[qindex:]
+                    else:
+                        surname = qsurname
                     if qindex2 != -1:
                         prefname = qprefname[:qindex2] + '\'' + qprefname[qindex2:]
-                    
+                    else:
+                        prefname = qprefname
+
 
                     if sid in sidl:
                         pass
@@ -344,7 +348,6 @@ meetingts = str(meetingtl).strip('[]')
 studentsts = str(studentstl).strip('[]')
 takets = str(taketl).strip('[]')
 
-print(studentsts)
 
 
 #debug
