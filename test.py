@@ -21,6 +21,8 @@ for file in os.listdir(absdir):
 #each element is a tuple string
 #it has to be outside big loop because they are relations, and I don't want
 #them to duplicate
+newstudentstl = []
+newstudentsts = ''
 studentstl = []
 studentsts = ''
 taketl = []
@@ -299,6 +301,11 @@ for allcsvfile in l:
                         studentstuple = (sid,status,mcurrentrow[3],mcurrentrow[2],email)
                         studentstl.append(studentstuple)
 
+                        newstudenttuple = "('%s','%s','%s','%s','%s')" \
+                                %(sid,status,mcurrentrow[3],mcurrentrow[2],email)
+                        newstudentstl.append(newstudenttuple)
+
+
                     #construting take tuples
                     #find number grade using dictionary
                     if grade in gradedic:
@@ -357,7 +364,7 @@ coursests = str(coursestl).strip('[]')
 meetingts = str(meetingtl).strip('[]')
 studentsts = str(studentstl).strip('[]')
 takets = str(taketl).strip('[]')
-
+newstudentsts = str(newstudentstl).strip('[]')
 
 
 #debug
