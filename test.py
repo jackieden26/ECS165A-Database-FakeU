@@ -270,16 +270,26 @@ for allcsvfile in l:
                     email = mcurrentrow[10]
 
 
-                    qindex = qsurname.find('\'')
-                    qindex2 = qsurname.find('\'')
-                    if qindex != -1:
-                        surname = qsurname[:qindex] + '\'' + qsurname[qindex:]
+                    # qindex = qsurname.find('\'')
+                    # qindex2 = qprefname.find('\'')
+                    # if qindex != -1:
+                    #     surname = qsurname[:qindex] + '\'' + qsurname[qindex:]
+                    # else:
+                    #     surname = qsurname
+                    # if qindex2 != -1:
+                    #     prefname = qprefname[:qindex2] + '\'' + qprefname[qindex2:]
+                    # else:
+                    #     prefname = qprefname
+
+                    if "'" in qsurname:
+                        surname = qsurname.replace("'","''")
                     else:
                         surname = qsurname
-                    if qindex2 != -1:
-                        prefname = qprefname[:qindex2] + '\'' + qprefname[qindex2:]
+                    if "'" in qprefname:
+                        prefname = qprefname.replace("'","''")
                     else:
                         prefname = qprefname
+
 
 
                     if sid in sidl:
@@ -315,7 +325,7 @@ for allcsvfile in l:
                             print("this line is: ",i)
 
                     else:
-                        if units != 0 and units != float(unitsrange):
+                        if units > float(unitsrange):
                             print("student units not the same as this class")
                             print("stdeunt units is: ", units)
                             print("this file is: ",allcsvfile )
