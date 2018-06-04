@@ -3,7 +3,7 @@ import sys
 import os
 import fnmatch
 import ntpath
-#path = "/Users/jackie/Desktop/Grades"
+# absdir = "/Users/jackie/Desktop/Grades"
                                     #duplicate_test
                                     #1989_Q4.csv
 
@@ -284,21 +284,22 @@ for allcsvfile in l:
                     #     prefname = qprefname
 
                     if "'" in mcurrentrow[2]:
-                        mcurrentrow[2] = mcurrentrow[2].replace("'","''")
+                        mcurrentrow[2] = mcurrentrow[2].replace("'","")
                     # else:
                     #     surname = qsurname
                     if "'" in qprefname:
-                        mcurrentrow[3] = mcurrentrow[3].replace("'","''")
+                        mcurrentrow[3] = mcurrentrow[3].replace("'","")
                     # else:
                     #     prefname = qprefname
-
+                    if "'" in mcurrentrow[10]:
+                        mcurrentrow[10] = mcurrentrow[10].replace("'","")
 
 
                     if sid in sidl:
                         pass
                     else:
                         sidl.append(sid)
-                        studentstuple = (sid,status,mcurrentrow[3],mcurrentrow[2],email)
+                        studentstuple = (sid,status,mcurrentrow[3],mcurrentrow[2],mcurrentrow[10])
                         studentstl.append(studentstuple)
 
                         newstudenttuple = "('%s','%s','%s','%s','%s')" \

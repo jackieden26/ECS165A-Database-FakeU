@@ -1,4 +1,0 @@
-#!/bin/sh
-myvar="$1"
-echo 'argument in bash is: ' "$myvar"
-python test.py "$myvar"
